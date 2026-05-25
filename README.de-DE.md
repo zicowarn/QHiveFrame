@@ -217,46 +217,31 @@ target_link_libraries(ihr_target PRIVATE QHiveFrame::QHiveFrame)
 
 ## Beispiel
 
-Eine **ImageViewer**-Demo befindet sich unter [`examples/imageviewer/`](examples/imageviewer/):
+Eine **einheitliche Demo** befindet sich unter [`examples/uni-demo/`](examples/uni-demo/):
 
 ```bash
 # Mit Beispielen bauen
 cmake --preset debug -DBUILD_EXAMPLES=ON
 cmake --build --preset debug
-./build/debug/examples/imageviewer/imageviewer
+./build/debug/bin/uni-demo
 ```
 
-Das Beispiel demonstriert:
-- Erstellen eines benutzerdefinierten `QHFWorkspaceBase` mit Split-Pane-Layout
-- Implementieren eines benutzerdefinierten `QHFEditorBase` mit mehreren Modi
-- Schreiben von `QHFModeBase`-Unterklassen (Betrachter und Infopanel)
-- Vollständige Registrierungsverdrahtung mit den Framework-Makros
-
-Zum eigenständigen Bauen (nach Installation von QHiveFrame):
-
-```bash
-cd examples/imageviewer
-cmake -B build -DCMAKE_PREFIX_PATH=/pfad/zu/installiertem/QHiveFrame
-cmake --build build
-```
-
-![ImageViewer-Demo](screenshots/imageviewer_demo.png) <!-- Screenshot hier einfügen, wenn verfügbar -->
+Die Demo zeigt alle wichtigen Framework-Funktionen in einer Anwendung:
+- **Split-Pane-Workspace** — Mehrere Editoren mit Teilen/Schließen-Steuerung
+- **Multi-Editor-Umschaltung** — Baum-, Detail- und Kanban-Panels
+- **Multi-Mode-Umschaltung** — Jeder Editor unterstützt modusabhängige Inhalte
+- **Einklappbare Abschnitte** — Auf-/Zuklappen von Inhaltsfeldern
+- **Kanban-Board** — Drag-freies Spaltenlayout mit Karten-Gruppierung
+- **Benutzerdefinierte Widgets** — CollapsibleSection, thematisierte Formulare
+- **Editor/Mode-Registrierung** — Vollständige Verdrahtung über Factory-Registries
 
 ---
 
 ## Screenshots
 
-Screenshots werden im [`screenshots/`](screenshots/)-Verzeichnis gespeichert. Erstellen Sie Ihre eigenen oder tragen Sie bei:
+Screenshots werden im [`screenshots/`](screenshots/)-Verzeichnis gespeichert und im README wie folgt referenziert:
 
-1. Bauen und Ausführen eines Beispiels
-2. Aufnehmen eines PNG- oder animierten GIF-Screenshots
-3. Speichern in `screenshots/<name>.png`
-4. Referenzieren im README: `![description](screenshots/<name>.png)`
-
-Empfohlene Werkzeuge:
-- **macOS**: `Cmd+Umschalt+4` (PNG), GIPHY Capture (GIF)
-- **Linux**: `ffmpeg -f x11grab` (GIF mit `palettegen`)
-- **Windows**: ShareX, ScreenToGif
+![Demobild](screenshots/imageviewer_demo.gif)
 
 ---
 

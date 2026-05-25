@@ -32,3 +32,12 @@ compile_commands.json
 
 # Workspace notes (agent memory, not project code)
 memory/
+
+# Agent workspace files (OpenClaw)
+.openclaw/
+AGENTS.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md

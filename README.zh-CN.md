@@ -215,6 +215,36 @@ target_link_libraries(your_target PRIVATE QHiveFrame::QHiveFrame)
 
 ---
 
+## 示例
+
+[`examples/uni-demo/`](examples/uni-demo/) 目录下提供了一个**统一演示程序**：
+
+```bash
+# 构建（含示例）
+cmake --preset debug -DBUILD_EXAMPLES=ON
+cmake --build --preset debug
+./build/debug/bin/uni-demo
+```
+
+该演示展示了框架的主要功能：
+- **分屏工作区** — 多个编辑器面板，支持分割/关闭操作
+- **多编辑器切换** — 树形、详情、看板三种面板
+- **多模式切换** — 每个编辑器支持模式感知的内容切换
+- **可折叠区块** — 展开/折叠内容面板
+- **看板布局** — 无拖拽的列式卡片分组
+- **自定义控件** — CollapsibleSection、主题表单控件
+- **Editor/Mode 注册** — 通过 Factory 注册完成完整装配
+
+---
+
+## 截图
+
+截图存储在 [`screenshots/`](screenshots/) 目录中，通过以下方式引用：
+
+![演示截图](screenshots/imageviewer_demo.gif)
+
+---
+
 ## 架构图
 
 ```

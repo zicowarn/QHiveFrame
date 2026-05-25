@@ -217,46 +217,31 @@ target_link_libraries(your_target PRIVATE QHiveFrame::QHiveFrame)
 
 ## Example
 
-An **ImageViewer** demo is included under [`examples/imageviewer/`](examples/imageviewer/):
+A **unified demo** is included under [`examples/uni-demo/`](examples/uni-demo/):
 
 ```bash
 # Build with examples
 cmake --preset debug -DBUILD_EXAMPLES=ON
 cmake --build --preset debug
-./build/debug/examples/imageviewer/imageviewer
+./build/debug/bin/uni-demo
 ```
 
-The example demonstrates:
-- Creating a custom `QHFWorkspaceBase` with split-pane layout
-- Implementing a custom `QHFEditorBase` with multiple modes
-- Writing `QHFModeBase` subclasses (viewer and info panel)
-- Full registration wiring using the framework's macros
-
-To build it standalone (after installing QHiveFrame):
-
-```bash
-cd examples/imageviewer
-cmake -B build -DCMAKE_PREFIX_PATH=/path/to/installed/QHiveFrame
-cmake --build build
-```
-
-![ImageViewer Demo](screenshots/imageviewer_demo.png) <!-- Add screenshot here when available -->
+The demo showcases all major framework features in a single application:
+- **Split-pane workspace** — Multiple editors with split/close controls
+- **Multi-editor switching** — Tree, Detail, and Kanban panels
+- **Multi-mode switching** — Each editor supports mode-aware content switching
+- **Collapsible sections** — Fold/unfold content panels
+- **Kanban board** — Drag-free column layout with card grouping
+- **Custom widgets** — CollapsibleSection, themed form controls
+- **Editor/Mode registration** — Full wiring via factory registries
 
 ---
 
 ## Screenshots
 
-Screenshots are stored in the [`screenshots/`](screenshots/) directory. Capture your own or contribute by:
+Screenshots are stored in the [`screenshots/`](screenshots/) directory and referenced in the README as:
 
-1. Building and running an example
-2. Taking a PNG or animated GIF screenshot
-3. Saving it to `screenshots/<name>.png`
-4. Referencing it in the README: `![description](screenshots/<name>.png)`
-
-Recommended tools for capture:
-- **macOS**: `Cmd+Shift+4` (PNG), GIPHY Capture (GIF)
-- **Linux**: `ffmpeg -f x11grab` (GIF with `palettegen`)
-- **Windows**: ShareX, ScreenToGif
+![description](screenshots/imageviewer_demo.gif)
 
 ---
 
