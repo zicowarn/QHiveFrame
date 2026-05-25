@@ -7,11 +7,11 @@
 /**
  * @brief Project tree view mode — displays project/task hierarchy using QTreeWidget.
  */
-class ProjectTreeMode : public QHF::QHFModeBase {
+class TreeMode : public QHF::QHFModeBase {
     Q_OBJECT
 public:
-    explicit ProjectTreeMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
-    ~ProjectTreeMode() override = default;
+    explicit TreeMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
+    ~TreeMode() override = default;
 
     [[nodiscard]] QString modeName() const override;
 

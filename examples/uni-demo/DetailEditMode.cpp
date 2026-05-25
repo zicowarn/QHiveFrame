@@ -1,27 +1,27 @@
-#include "TaskEditMode.h"
+#include "DetailEditMode.h"
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QLabel>
 
-TaskEditMode::TaskEditMode(QHF::IEditorContext* context, QWidget* parent)
+DetailEditMode::DetailEditMode(QHF::IEditorContext* context, QWidget* parent)
     : QHF::QHFModeBase(context, parent)
 {
     buildForm();
 }
 
-QString TaskEditMode::modeName() const
+QString DetailEditMode::modeName() const
 {
     return QStringLiteral("TaskEdit");
 }
 
-void TaskEditMode::buildForm()
+void DetailEditMode::buildForm()
 {
     auto* outerLayout = new QVBoxLayout(this);
     outerLayout->setContentsMargins(8, 8, 8, 8);
 
-    auto* titleLabel = new QLabel(tr("<h3>编辑任务</h3>"), this);
+    auto* titleLabel = new QLabel(tr("<h3>Edit Task</h3>"), this);
     outerLayout->addWidget(titleLabel);
 
     auto* formLayout = new QFormLayout();
@@ -29,59 +29,59 @@ void TaskEditMode::buildForm()
 
     // Title
     m_titleEdit = new QLineEdit(this);
-    m_titleEdit->setText(tr("核心框架重构"));
-    m_titleEdit->setPlaceholderText(tr("请输入任务标题"));
-    formLayout->addRow(tr("任务标题:"), m_titleEdit);
+    m_titleEdit->setText(tr("Core Refactor"));
+    m_titleEdit->setPlaceholderText(tr("Enter task title..."));
+    formLayout->addRow(tr("Title:"), m_titleEdit);
 
     // Priority
     m_priorityCbo = new QComboBox(this);
-    m_priorityCbo->addItems({tr("低"), tr("中"), tr("高"), tr("紧急")});
-    m_priorityCbo->setCurrentIndex(2); // 高
-    formLayout->addRow(tr("优先级:"), m_priorityCbo);
+    m_priorityCbo->addItems({tr("Low"), tr("Medium"), tr("High"), tr("Urgent")});
+    m_priorityCbo->setCurrentIndex(2); // High
+    formLayout->addRow(tr("Priority:"), m_priorityCbo);
 
     // Status
     m_statusCbo = new QComboBox(this);
-    m_statusCbo->addItems({tr("待开始"), tr("进行中"), tr("已完成"), tr("已取消")});
-    m_statusCbo->setCurrentIndex(1); // 进行中
-    formLayout->addRow(tr("状态:"), m_statusCbo);
+    m_statusCbo->addItems({tr("Todo"), tr("In Progress"), tr("Done"), tr("Cancelled")});
+    m_statusCbo->setCurrentIndex(1); // In Progress
+    formLayout->addRow(tr("Status:"), m_statusCbo);
 
     // Progress (QHFCustomUnitSpinBox substitute — demonstrates custom widget pattern)
     m_progressSpin = new QSpinBox(this);
     m_progressSpin->setRange(0, 100);
     m_progressSpin->setValue(65);
     m_progressSpin->setSuffix(tr(" %"));
-    m_progressSpin->setToolTip(tr("任务完成进度 (0-100%)"));
-    formLayout->addRow(tr("进度:"), m_progressSpin);
+    m_progressSpin->setToolTip(tr("Task progress (0-100%)"));
+    formLayout->addRow(tr("Progress:"), m_progressSpin);
 
     // Deadline
     m_deadlineEdit = new QDateEdit(this);
     m_deadlineEdit->setDate(QDate(2026, 6, 30));
     m_deadlineEdit->setCalendarPopup(true);
     m_deadlineEdit->setDisplayFormat("yyyy-MM-dd");
-    formLayout->addRow(tr("截止日期:"), m_deadlineEdit);
+    formLayout->addRow(tr("Due Date:"), m_deadlineEdit);
 
     outerLayout->addLayout(formLayout);
 
     // Description
-    outerLayout->addWidget(new QLabel(tr("描述:"), this));
+    outerLayout->addWidget(new QLabel(tr("Description:"), this));
     m_descEdit = new QTextEdit(this);
-    m_descEdit->setPlaceholderText(tr("请输入任务描述..."));
+    m_descEdit->setPlaceholderText(tr("Enter task description..."));
     m_descEdit->setMinimumHeight(120);
     m_descEdit->setPlainText(
-        tr("重构 QHiveFrame 核心模块，优化 Workspace/Editor/Mode 架构。\n"
+        tr("Refactor QHiveFrame core modules.\n"
            "\n"
-           "- 提取公共接口\n"
-           "- 实现增量更新\n"
-           "- 多窗口状态同步\n"
-           "- 性能优化"));
+           "- Extract common interfaces\n"
+           "- Incremental updates\n"
+           "- Multi-window state sync\n"
+           "- Performance optimization"));
     outerLayout->addWidget(m_descEdit);
 
     // Save button
-    auto* saveBtn = new QPushButton(tr("💾 保存修改"), this);
+    auto* saveBtn = new QPushButton(tr("Save"), this);
     saveBtn->setMinimumHeight(36);
     QObject::connect(saveBtn, &QPushButton::clicked, this, [this]() {
-        QMessageBox::information(this, tr("保存成功"),
-                                 tr("任务 \"%1\" 已保存。\n\n优先级: %2\n状态: %3\n进度: %4%")
+        QMessageBox::information(this, tr("Saved"),
+                                 tr("Task \"%1\" saved.\n\nPriority: %2\nStatus: %3\nProgress: %4%")
                                      .arg(m_titleEdit->text(),
                                           m_priorityCbo->currentText(),
                                           m_statusCbo->currentText(),
@@ -92,7 +92,7 @@ void TaskEditMode::buildForm()
     outerLayout->addStretch();
 }
 
-void TaskEditMode::handleNotifyImpl(const QHF::QHFNotifier& notifier)
+void DetailEditMode::handleNotifyImpl(const QHF::QHFNotifier& notifier)
 {
     Q_UNUSED(notifier);
 }

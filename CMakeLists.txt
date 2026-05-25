@@ -6,21 +6,21 @@ project(QHiveFrame
 )
 
 # ============================================
-# 构建环境配置
+# Build environment
 # ============================================
-# 本项目使用 CMakePresets.json 管理共享构建预设（debug / release / test / docs），
-# 开箱即用：cmake --preset <name> && cmake --build --preset <name>
+# Shared build presets (debug / release / test / docs) are managed via CMakePresets.json.
+# Ready to use: cmake --preset <name> && cmake --build --preset <name>
 #
-# 若 Qt5 等第三方依赖安装在非标准路径，请创建本地用户预设：
+# For non-standard Qt5 paths, create a local user preset:
 #   cp CMakeUserPresets.json.example CMakeUserPresets.json
-#   # 编辑 CMakeUserPresets.json，设置 Qt5_DIR 等环境相关变量
+#   # Edit CMakeUserPresets.json to set Qt5_DIR etc.
 #   cmake --preset <your-local-preset>
 #
-# CMakeUserPresets.json 已被 .gitignore 忽略，不会提交到版本库。
+# CMakeUserPresets.json is .gitignore'd and won't be committed.
 # ============================================
 
 # ============================================
-# 编译选项
+# Compile options
 # ============================================
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,22 +29,22 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-# MSVC 特定选项
+# MSVC-specific options
 if(MSVC)
     add_compile_options(/utf-8)
-    add_compile_options(/MP)  # 多核编译
+    add_compile_options(/MP)  # Multi-core compile
     add_compile_options(/bigobj)
 endif()
 
 # ============================================
-# 构建类型
+# Build types & options
 # ============================================
 option(BUILD_SHARED_LIBS "Build QHiveFrame as shared library" OFF)
 option(BUILD_EXAMPLES "Build example applications" OFF)
 option(BUILD_DOCS "Build Doxygen documentation" OFF)
 
 # ============================================
-# Qt 依赖
+# Qt dependencies
 # ============================================
 # Prefer Homebrew Qt5 over system Qt6 to avoid include path conflicts
 set(CMAKE_FIND_FRAMEWORK LAST)
@@ -134,21 +134,7 @@ set(QHF_RESOURCE_FILES
 )
 
 # ============================================
-# 头文件目录
-# ============================================
-set(QHF_INCLUDE_DIRS
-    ${CMAKE_CURRENT_SOURCE_DIR}/core
-    ${CMAKE_CURRENT_SOURCE_DIR}/dialog
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu
-    ${CMAKE_CURRENT_SOURCE_DIR}/workspace
-    ${CMAKE_CURRENT_SOURCE_DIR}/subeditor
-    ${CMAKE_CURRENT_SOURCE_DIR}/subeditormode
-    ${CMAKE_CURRENT_SOURCE_DIR}/preferencepanel
-    ${CMAKE_CURRENT_SOURCE_DIR}/customwidget
-)
-
-# ============================================
-# 目标库
+# Library target
 # ============================================
 set(QHF_ALL_SOURCES
     ${QHF_CORE_SOURCES}
@@ -178,10 +164,11 @@ else()
 endif()
 
 # ============================================
-# 目标属性
+# Target properties
 # ============================================
 target_include_directories(${PROJECT_NAME}
     PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/init>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/dialog>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/menu>
@@ -228,14 +215,14 @@ if(Qt5_FOUND)
     unset(__qt5_include_root)
 endif()
 
-# 版本宏
+# Version macros
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE
         PRODUCT_VERSION="${PROJECT_VERSION}"
 )
 
 # ============================================
-# 安装规则
+# Install rules
 # ============================================
 include(GNUInstallDirs)
 
@@ -289,7 +276,7 @@ if(BUILD_TESTS)
 endif()
 
 # ============================================
-# Doxygen 文档（可选）
+# Doxygen docs (optional)
 # ============================================
 if(BUILD_DOCS)
     find_package(Doxygen REQUIRED)
@@ -310,7 +297,7 @@ if(BUILD_DOCS)
     set(DOXYGEN_MACRO_EXPANSION YES)
     set(DOXYGEN_EXPAND_ONLY_PREDEF YES)
 
-    # 使用自定义 Doxyfile.in 作为模板
+    # Use custom Doxyfile.in as template
     set(DOXYGEN_DOT_FOUND TRUE)
     if(DOXYGEN_DOT_FOUND)
         set(DOXYGEN_HAVE_DOT YES)
@@ -332,24 +319,24 @@ if(BUILD_DOCS)
 endif()
 
 # ============================================
-# 示例程序（可选）
+# Example programs (optional)
 # ============================================
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
 # ============================================
-# clang-format 代码格式化
+# clang-format
 # ============================================
-# 用法：
-#   cmake --build <build-dir> --target format       # 格式化所有源文件
-#   cmake --build <build-dir> --target check-format  # 仅检查，不修改
+# Usage:
+#   cmake --build <build-dir> --target format       # Format all sources
+#   cmake --build <build-dir> --target check-format  # Check only (no edits)
 #
-# 或通过 preset:
+# Via preset:
 #   cmake --build --preset test --target format
 # ============================================
 
-# 收集所有需格式化的源文件（不含 build 目录和第三方）
+# Collect all source files for formatting (exclude build/ and third-party)
 set(QHF_FORMAT_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/core
     ${CMAKE_CURRENT_SOURCE_DIR}/dialog
@@ -370,7 +357,7 @@ file(GLOB_RECURSE QHF_FORMAT_SOURCES
 
 find_program(CLANG_FORMAT clang-format)
 if(CLANG_FORMAT)
-    # 格式化（就地修改）
+    # Format (in-place)
     add_custom_target(format
         COMMAND ${CLANG_FORMAT}
             -i -style=file -fallback-style=none
@@ -379,7 +366,7 @@ if(CLANG_FORMAT)
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
 
-    # 格式检查（CI 用，只报告差异，不修改）
+    # Format check (CI only — report differences, no edits)
     add_custom_target(check-format
         COMMAND ${CLANG_FORMAT}
             -style=file --dry-run -Werror
@@ -388,7 +375,7 @@ if(CLANG_FORMAT)
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
 else()
-    # 友好提示
+    # User-friendly fallback message
     add_custom_target(format
         COMMAND ${CMAKE_COMMAND} -E echo
             "[QHiveFrame] clang-format not found. Install it: brew install clang-format"

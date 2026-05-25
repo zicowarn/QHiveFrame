@@ -1,5 +1,5 @@
-#include "ProjectManageWorkspace.h"
-#include "TaskBoardWorkspace.h"
+#include "SplitDemoWorkspace.h"
+#include "KanbanDemoWorkspace.h"
 #include "QHFAppMainWindow.h"
 #include "QHFWorkspaceFactory.h"
 
@@ -14,24 +14,24 @@ int main(int argc, char* argv[])
     Q_INIT_RESOURCE(QHFGuiIcons);
 
     QApplication app(argc, argv);
-    app.setApplicationName("QHiveFrame Project Manager");
+    app.setApplicationName("QHiveFrame Uni Demo");
     app.setOrganizationName("QHiveFrame");
 
     // Register workspaces — QHFAppMainWindow discovers them via QHFWorkspaceRegistry
-    QHF::QHFWorkspaceRegistry::registerWorkspace<ProjectManageWorkspace>(
-        QHF::QHFWorkspaceType::PM_PROJECT, 5000);
-    QHF::QHFWorkspaceRegistry::registerWorkspace<TaskBoardWorkspace>(
-        QHF::QHFWorkspaceType::PM_TASKBOARD, 5100);
+    QHF::QHFWorkspaceRegistry::registerWorkspace<SplitDemoWorkspace>(
+        QHF::QHFWorkspaceType::SPLIT_DEMO, 5000);
+    QHF::QHFWorkspaceRegistry::registerWorkspace<KanbanDemoWorkspace>(
+        QHF::QHFWorkspaceType::KANBAN_DEMO, 5100);
 
     // Create the main window — it will initialize all registered workspaces
     QHF::QHFAppMainWindow window;
-    window.setWindowTitle(QStringLiteral("QHiveFrame — 项目管理 Demo"));
+    window.setWindowTitle(QStringLiteral("QHiveFrame — Uni Demo"));
     window.resize(1200, 800);
     window.show();
 
-    qDebug() << "QHiveFrame Project Manager demo started.";
+    qDebug() << "QHiveFrame Uni Demo started.";
     qDebug() << "Features demonstrated:";
-    qDebug() << "  - Multiple workspaces (项目管理 / 任务看板)";
+    qDebug() << "  - Multiple workspaces (Split Demo / Kanban Demo)";
     qDebug() << "  - Split editor layout (project tree | task detail)";
     qDebug() << "  - Multiple modes per editor (tree/list, view/edit)";
     qDebug() << "  - QHFCollapsibleSection, QSpinBox, Form widgets";

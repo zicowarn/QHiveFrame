@@ -12,11 +12,11 @@
  * @brief Task edit mode — editable form for task properties.
  * Demonstrates QHFCustomUnitSpinBox via standard QSpinBox (substitution).
  */
-class TaskEditMode : public QHF::QHFModeBase {
+class DetailEditMode : public QHF::QHFModeBase {
     Q_OBJECT
 public:
-    explicit TaskEditMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
-    ~TaskEditMode() override = default;
+    explicit DetailEditMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
+    ~DetailEditMode() override = default;
 
     [[nodiscard]] QString modeName() const override;
 

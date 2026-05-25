@@ -3,11 +3,11 @@
 
 #include "QHFEditorBase.h"
 
-class TaskEditor : public QHF::QHFEditorBase {
+class DetailEditor : public QHF::QHFEditorBase {
     Q_OBJECT
 public:
-    explicit TaskEditor(QWidget* parent = nullptr);
-    ~TaskEditor() override = default;
+    explicit DetailEditor(QWidget* parent = nullptr);
+    ~DetailEditor() override = default;
 
     [[nodiscard]] QString            editorName() const override;
     [[nodiscard]] QHF::EditorType    editorType() const override;

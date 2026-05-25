@@ -7,11 +7,11 @@
 /**
  * @brief Task view mode — read-only task detail with collapsible sections.
  */
-class TaskViewMode : public QHF::QHFModeBase {
+class DetailViewMode : public QHF::QHFModeBase {
     Q_OBJECT
 public:
-    explicit TaskViewMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
-    ~TaskViewMode() override = default;
+    explicit DetailViewMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
+    ~DetailViewMode() override = default;
 
     [[nodiscard]] QString modeName() const override;
 

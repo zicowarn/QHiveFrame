@@ -1,13 +1,13 @@
-#ifndef PROJECTMANAGEWORKSPACE_H
-#define PROJECTMANAGEWORKSPACE_H
+#ifndef TASKBOARDWORKSPACE_H
+#define TASKBOARDWORKSPACE_H
 
 #include "QHFWorkspaceBase.h"
 
-class ProjectManageWorkspace : public QHF::QHFWorkspaceBase {
+class KanbanDemoWorkspace : public QHF::QHFWorkspaceBase {
     Q_OBJECT
 public:
-    explicit ProjectManageWorkspace(QWidget* parent = nullptr, bool isInitialize = true);
-    ~ProjectManageWorkspace() override;
+    explicit KanbanDemoWorkspace(QWidget* parent = nullptr, bool isInitialize = true);
+    ~KanbanDemoWorkspace() override;
 
     [[nodiscard]] QString               workspaceName() const override;
     [[nodiscard]] QHF::QHFWorkspaceType workspaceType() const override;
@@ -17,4 +17,4 @@ private:
     void handleNotifyImpl(const QHF::QHFNotifier& notifier) override;
 };
 
-#endif // PROJECTMANAGEWORKSPACE_H
+#endif // TASKBOARDWORKSPACE_H

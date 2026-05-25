@@ -10,12 +10,12 @@ KanbanEditor::KanbanEditor(QWidget* parent)
 
 QString KanbanEditor::editorName() const
 {
-    return QStringLiteral("看板");
+    return QStringLiteral("Kanban");
 }
 
 QHF::EditorType KanbanEditor::editorType() const
 {
-    return QHF::EditorType::PM_KANBAN;
+    return QHF::EditorType::KANBAN;
 }
 
 QHF::IModeContext* KanbanEditor::createMode(const QString& modeName)
@@ -23,7 +23,7 @@ QHF::IModeContext* KanbanEditor::createMode(const QString& modeName)
     if (modeName == QStringLiteral("KanbanBoard")) {
         return new KanbanMode(this, this);
     }
-    qWarning() << "[PM] Unknown mode for KanbanEditor:" << modeName;
+    qWarning() << "[UniDemo] Unknown mode for KanbanEditor:" << modeName;
     return nullptr;
 }
 
@@ -34,7 +34,7 @@ QString KanbanEditor::defaultModeName() const
 
 QList<QPair<QString, QString>> KanbanEditor::collectModeNames() const
 {
-    return {{tr("看板"), QStringLiteral("KanbanBoard")}};
+    return {{tr("Kanban"), QStringLiteral("KanbanBoard")}};
 }
 
 void KanbanEditor::initializeImpl(const QList<QPair<QString, QString>>& modeNames)
@@ -47,8 +47,8 @@ void KanbanEditor::initializeImpl(const QList<QPair<QString, QString>>& modeName
             m_editorCombo->removeItem(i);
         }
     }
-    setEditorTitle(tr("看板"));
-    initializeModeCombo({{tr("看板"), QStringLiteral("KanbanBoard")}}, QStringLiteral("KanbanBoard"));
+    setEditorTitle(tr("Kanban"));
+    initializeModeCombo({{tr("Kanban"), QStringLiteral("KanbanBoard")}}, QStringLiteral("KanbanBoard"));
 }
 
 void KanbanEditor::handleNotifyImpl(const QHF::QHFNotifier& notifier)

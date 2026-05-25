@@ -1,8 +1,8 @@
-#include "ProjectListMode.h"
+#include "ListMode.h"
 #include <QVBoxLayout>
 #include <QHeaderView>
 
-ProjectListMode::ProjectListMode(QHF::IEditorContext* context, QWidget* parent)
+ListMode::ListMode(QHF::IEditorContext* context, QWidget* parent)
     : QHF::QHFModeBase(context, parent)
 {
     auto* layout = new QVBoxLayout(this);
@@ -10,7 +10,7 @@ ProjectListMode::ProjectListMode(QHF::IEditorContext* context, QWidget* parent)
 
     m_table = new QTableWidget(this);
     m_table->setColumnCount(4);
-    m_table->setHorizontalHeaderLabels({tr("项目名称"), tr("任务数"), tr("进度"), tr("状态")});
+    m_table->setHorizontalHeaderLabels({tr("Project Name"), tr("Tasks"), tr("Progress"), tr("Status")});
     m_table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     m_table->setAlternatingRowColors(true);
     m_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -21,12 +21,12 @@ ProjectListMode::ProjectListMode(QHF::IEditorContext* context, QWidget* parent)
     populateMockData();
 }
 
-QString ProjectListMode::modeName() const
+QString ListMode::modeName() const
 {
     return QStringLiteral("ProjectList");
 }
 
-void ProjectListMode::populateMockData()
+void ListMode::populateMockData()
 {
     struct ProjectRow {
         QString name;
@@ -36,11 +36,11 @@ void ProjectListMode::populateMockData()
     };
 
     const QList<ProjectRow> data = {
-        {tr("QHiveFrame 开发"),     8, 65, tr("进行中")},
-        {tr("客户Demo演示"),         4, 10, tr("计划中")},
-        {tr("性能优化专项"),         6, 90, tr("收尾中")},
-        {tr("企业内部工具"),         12, 40, tr("进行中")},
-        {tr("开源社区运营"),         3, 100, tr("已完成")},
+        {tr("QHiveFrame Dev"),     8, 65, tr("In Progress")},
+        {tr("Client Demo"),         4, 10, tr("Planning")},
+        {tr("Performance Opt"),         6, 90, tr("Wrapping Up")},
+        {tr("Internal Tools"),         12, 40, tr("In Progress")},
+        {tr("OSS Community"),         3, 100, tr("Done")},
     };
 
     m_table->setRowCount(data.size());
@@ -52,7 +52,7 @@ void ProjectListMode::populateMockData()
     }
 }
 
-void ProjectListMode::handleNotifyImpl(const QHF::QHFNotifier& notifier)
+void ListMode::handleNotifyImpl(const QHF::QHFNotifier& notifier)
 {
     Q_UNUSED(notifier);
 }

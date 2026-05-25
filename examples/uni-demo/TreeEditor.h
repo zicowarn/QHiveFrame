@@ -3,11 +3,11 @@
 
 #include "QHFEditorBase.h"
 
-class ProjectTreeEditor : public QHF::QHFEditorBase {
+class TreeEditor : public QHF::QHFEditorBase {
     Q_OBJECT
 public:
-    explicit ProjectTreeEditor(QWidget* parent = nullptr);
-    ~ProjectTreeEditor() override = default;
+    explicit TreeEditor(QWidget* parent = nullptr);
+    ~TreeEditor() override = default;
 
     [[nodiscard]] QString            editorName() const override;
     [[nodiscard]] QHF::EditorType    editorType() const override;

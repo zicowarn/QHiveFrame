@@ -7,11 +7,11 @@
 /**
  * @brief Project list view mode — flat table view of projects with status/count columns.
  */
-class ProjectListMode : public QHF::QHFModeBase {
+class ListMode : public QHF::QHFModeBase {
     Q_OBJECT
 public:
-    explicit ProjectListMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
-    ~ProjectListMode() override = default;
+    explicit ListMode(QHF::IEditorContext* context, QWidget* parent = nullptr);
+    ~ListMode() override = default;
 
     [[nodiscard]] QString modeName() const override;
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-# Project Manager Demo — standalone example for QHiveFrame framework
+# Uni Demo — standalone example for QHiveFrame framework
 # Demonstrates:
 #   - Multiple workspaces with workspace tab switching
 #   - Split editor layout (horizontal split with project tree + task detail)
@@ -9,21 +9,21 @@ cmake_minimum_required(VERSION 3.18)
 #
 # Build:
 #   cmake --preset mac-brew -DBUILD_EXAMPLES=ON
-#   cmake --build --preset mac-brew --target projectmanager
+#   cmake --build --preset mac-brew --target uni-demo
 
-set(TARGET projectmanager)
+set(TARGET uni-demo)
 
 set(SOURCES
     main.cpp
-    ProjectManageWorkspace.h    ProjectManageWorkspace.cpp
-    TaskBoardWorkspace.h        TaskBoardWorkspace.cpp
-    ProjectTreeEditor.h         ProjectTreeEditor.cpp
-    TaskEditor.h                TaskEditor.cpp
+    SplitDemoWorkspace.h    SplitDemoWorkspace.cpp
+    KanbanDemoWorkspace.h        KanbanDemoWorkspace.cpp
+    TreeEditor.h         TreeEditor.cpp
+    DetailEditor.h                DetailEditor.cpp
     KanbanEditor.h              KanbanEditor.cpp
-    ProjectTreeMode.h           ProjectTreeMode.cpp
-    ProjectListMode.h           ProjectListMode.cpp
-    TaskViewMode.h              TaskViewMode.cpp
-    TaskEditMode.h              TaskEditMode.cpp
+    TreeMode.h           TreeMode.cpp
+    ListMode.h           ListMode.cpp
+    DetailViewMode.h              DetailViewMode.cpp
+    DetailEditMode.h              DetailEditMode.cpp
     KanbanMode.h                KanbanMode.cpp
 )
 

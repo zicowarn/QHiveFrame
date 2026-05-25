@@ -22,14 +22,14 @@ void KanbanMode::buildBoard()
     m_splitter = new QSplitter(Qt::Horizontal, this);
     m_splitter->setHandleWidth(3);
 
-    m_splitter->addWidget(createColumn(tr("📋 待开始"),
-        {tr("原型设计"), tr("前端开发"), tr("文档更新")}));
+    m_splitter->addWidget(createColumn(tr("Todo"),
+        {tr("Prototype"), tr("Frontend Dev"), tr("Docs Update")}));
 
-    m_splitter->addWidget(createColumn(tr("🔄 进行中"),
-        {tr("核心框架重构"), tr("性能优化"), tr("单元测试编写")}));
+    m_splitter->addWidget(createColumn(tr("In Progress"),
+        {tr("Core Refactor"), tr("Performance"), tr("Unit Tests")}));
 
-    m_splitter->addWidget(createColumn(tr("✅ 已完成"),
-        {tr("需求分析"), tr("技术选型"), tr("环境搭建")}));
+    m_splitter->addWidget(createColumn(tr("Done"),
+        {tr("Requirements"), tr("Tech Stack"), tr("Setup")}));
 
     m_splitter->setSizes({1, 1, 1});
     layout->addWidget(m_splitter);
@@ -66,14 +66,14 @@ QWidget* KanbanMode::createColumn(const QString& title, const QStringList& tasks
 
         // Show a tag depending on the column
         auto* tag = new QLabel(card);
-        if (title.contains(tr("待开始"))) {
-            tag->setText(tr("⏳ 计划"));
+        if (title.contains(tr("Todo"))) {
+            tag->setText(tr("Planning"));
             tag->setStyleSheet(QStringLiteral("color: #888; border: none; font-size: 11px;"));
-        } else if (title.contains(tr("进行中"))) {
-            tag->setText(tr("🔥 活跃"));
+        } else if (title.contains(tr("In Progress"))) {
+            tag->setText(tr("Active"));
             tag->setStyleSheet(QStringLiteral("color: #e67e22; border: none; font-size: 11px;"));
         } else {
-            tag->setText(tr("✨ 完成"));
+            tag->setText(tr("Done"));
             tag->setStyleSheet(QStringLiteral("color: #27ae60; border: none; font-size: 11px;"));
         }
         cardLayout->addWidget(tag);

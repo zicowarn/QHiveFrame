@@ -2,98 +2,13 @@
 #define QHFUIIEDITORCONTEXT_H
 
 #include "QHFGuiNotifierCenter.h"
-#include "QHFUIUtils.h"
+#include "QHFTypeDefs.h"
 
 #include <QHBoxLayout>
 #include <QScrollArea>
 #include <QVariant>
 
 namespace QHF {
-
-    /**
-     * @brief Editor (see description)
-     * @details (see source)
-     * @note 请在此枚举中添加更多type
-     */
-    enum class EditorType : std::uint8_t {
-        NONE,            ///< Empty type
-        DUMMY,           ///< Placeholder type
-        SPECIAL,         ///< Special type (development example)
-        PM_PROJECT_TREE, ///< Project Manager — project tree editor
-        PM_TASK_DETAIL,  ///< Project Manager — task detail editor
-        PM_KANBAN,       ///< Project Manager — kanban editor
-        // ... extend with more editor types here
-    };
-
-    /**
-     * @brief  (see description)
-     * @details (see source)
-     */
-    namespace EditorTypeUtils {
-        QHF_DECLARE_NAMESPACE_TR(QHF::EditorTypeUtils);
-
-        /**
-         * @brief Converts to string
-         * @param mode editortype枚举value* @return string*/
-        inline QString toString(EditorType mode) {
-            switch (mode) {
-            case EditorType::DUMMY:
-                return "DUMMY";
-            case EditorType::SPECIAL:
-                return "SPECIAL";
-            case EditorType::PM_PROJECT_TREE:
-                return "PM_PROJECT_TREE";
-            case EditorType::PM_TASK_DETAIL:
-                return "PM_TASK_DETAIL";
-            case EditorType::PM_KANBAN:
-                return "PM_KANBAN";
-            // ... extend with more types here
-            default:
-                return "NONE";
-            }
-        }
-
-        inline QString toTransName(EditorType mode) {
-            switch (mode) {
-            case EditorType::DUMMY:
-                return tr("DUMMY");
-            case EditorType::SPECIAL:
-                return tr("SPECIAL");
-            case EditorType::PM_PROJECT_TREE:
-                return tr("项目树");
-            case EditorType::PM_TASK_DETAIL:
-                return tr("任务详情");
-            case EditorType::PM_KANBAN:
-                return tr("看板");
-            // ... extend with more types here
-            default:
-                return tr("NONE");
-            }
-        }
-
-        /**
-         * @brief Converts from string (see description)
-         * @param str string* @return editortype枚举value*/
-        inline EditorType fromString(const QString& str) {
-            if (str == "DUMMY") {
-                return EditorType::DUMMY;
-            }
-            if (str == "SPECIAL") {
-                return EditorType::SPECIAL;
-            }
-            if (str == "PM_PROJECT_TREE") {
-                return EditorType::PM_PROJECT_TREE;
-            }
-            if (str == "PM_TASK_DETAIL") {
-                return EditorType::PM_TASK_DETAIL;
-            }
-            if (str == "PM_KANBAN") {
-                return EditorType::PM_KANBAN;
-            }
-            // ... extend with more types here
-            return EditorType::NONE;
-        }
-    } // namespace EditorTypeUtils
 
     /**
      * @brief Editor (see description)
