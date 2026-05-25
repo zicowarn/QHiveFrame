@@ -16,9 +16,12 @@ namespace QHF {
      * @note 请在此枚举中添加更多type
      */
     enum class EditorType : std::uint8_t {
-        NONE,    ///< Empty type
-        DUMMY,   ///< Placeholder type
-        SPECIAL, ///< Special type (development example)
+        NONE,            ///< Empty type
+        DUMMY,           ///< Placeholder type
+        SPECIAL,         ///< Special type (development example)
+        PM_PROJECT_TREE, ///< Project Manager — project tree editor
+        PM_TASK_DETAIL,  ///< Project Manager — task detail editor
+        PM_KANBAN,       ///< Project Manager — kanban editor
         // ... extend with more editor types here
     };
 
@@ -38,6 +41,12 @@ namespace QHF {
                 return "DUMMY";
             case EditorType::SPECIAL:
                 return "SPECIAL";
+            case EditorType::PM_PROJECT_TREE:
+                return "PM_PROJECT_TREE";
+            case EditorType::PM_TASK_DETAIL:
+                return "PM_TASK_DETAIL";
+            case EditorType::PM_KANBAN:
+                return "PM_KANBAN";
             // ... extend with more types here
             default:
                 return "NONE";
@@ -50,6 +59,12 @@ namespace QHF {
                 return tr("DUMMY");
             case EditorType::SPECIAL:
                 return tr("SPECIAL");
+            case EditorType::PM_PROJECT_TREE:
+                return tr("项目树");
+            case EditorType::PM_TASK_DETAIL:
+                return tr("任务详情");
+            case EditorType::PM_KANBAN:
+                return tr("看板");
             // ... extend with more types here
             default:
                 return tr("NONE");
@@ -65,6 +80,15 @@ namespace QHF {
             }
             if (str == "SPECIAL") {
                 return EditorType::SPECIAL;
+            }
+            if (str == "PM_PROJECT_TREE") {
+                return EditorType::PM_PROJECT_TREE;
+            }
+            if (str == "PM_TASK_DETAIL") {
+                return EditorType::PM_TASK_DETAIL;
+            }
+            if (str == "PM_KANBAN") {
+                return EditorType::PM_KANBAN;
             }
             // ... extend with more types here
             return EditorType::NONE;

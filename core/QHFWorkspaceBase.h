@@ -19,9 +19,11 @@ namespace QHF {
      * @details (see source)
      */
     enum class QHFWorkspaceType : std::uint8_t {
-        NONE,  ///< Empty
-        DUMMY, ///< Test use
-        TEST,  ///< Test 2 use
+        NONE,       ///< Empty
+        DUMMY,      ///< Test use
+        TEST,       ///< Test 2 use
+        PM_PROJECT, ///< Project Manager — project workspace
+        PM_TASKBOARD, ///< Project Manager — kanban workspace
         // ... extend with more workspace types here
     };
 
@@ -42,6 +44,10 @@ namespace QHF {
                 return "DUMMY";
             case QHFWorkspaceType::TEST:
                 return "TEST";
+            case QHFWorkspaceType::PM_PROJECT:
+                return "PM_PROJECT";
+            case QHFWorkspaceType::PM_TASKBOARD:
+                return "PM_TASKBOARD";
             // ... extend with more types here
             default:
                 return "NONE";
@@ -58,6 +64,10 @@ namespace QHF {
                 return tr("DUMMY");
             case QHFWorkspaceType::TEST:
                 return tr("TEST");
+            case QHFWorkspaceType::PM_PROJECT:
+                return tr("项目管理");
+            case QHFWorkspaceType::PM_TASKBOARD:
+                return tr("任务看板");
             // ... extend with more types here
             default:
                 return tr("NONE");
@@ -75,6 +85,12 @@ namespace QHF {
             }
             if (str == "TEST") {
                 return QHFWorkspaceType::TEST;
+            }
+            if (str == "PM_PROJECT") {
+                return QHFWorkspaceType::PM_PROJECT;
+            }
+            if (str == "PM_TASKBOARD") {
+                return QHFWorkspaceType::PM_TASKBOARD;
             }
             // ... extend with more types here
             return QHFWorkspaceType::NONE;

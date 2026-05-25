@@ -2,6 +2,8 @@
     <qresource prefix="/gui">
         <file>icons/Close.svg</file>
         <file>icons/Mode.svg</file>
+        <file>icons/SplitV.svg</file>
+        <file>icons/SplitH.svg</file>
         <file>icons/menuIcon.svg</file>
         <file>icons/frontView.svg</file>
         <file>icons/backView.svg</file>
