@@ -13,6 +13,7 @@ on:
 
 env:
   BUILD_DIR: ${{ github.workspace }}/build/release
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   release:
@@ -135,6 +136,5 @@ jobs:
             See [commit log](https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}).
           files: |
             artifacts/**/*.tar.gz
-          draft: true
-          prerelease: false
+          draft: false
 ...
