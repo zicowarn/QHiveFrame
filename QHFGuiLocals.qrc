@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/i18n">
+        <file>locals/lang_en_US.qm</file>
+        <file>locals/lang_zh_CN.qm</file>
+        <file>locals/qt_en.qm</file>
+        <file>locals/qt_zh_CN.qm</file>
+    </qresource>
+</RCC>

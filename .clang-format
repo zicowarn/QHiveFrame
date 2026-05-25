@@ -1,0 +1,135 @@
+# QHiveFrame Code Style
+# Based on: Qt 5/6 style conventions + Google-inspired spacing
+# Requires clang-format 15+ for full feature support
+#
+# Usage:
+#   clang-format -i -style=file <file>        # format a single file
+#   find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i -style=file
+#
+# IDE integration:
+#   VS Code:    C/C++ extension → Clang_format_style = "file"
+#   CLion:      Settings → Code Style → C/C++ → clang-format
+#   Visual Studio: install clang-format extension, .clang-format is auto-detected
+#   Qt Creator: ClangFormat plugin enabled → reads .clang-format automatically
+
+---
+# === Base Style ===
+BasedOnStyle: Microsoft
+
+# === Indentation ===
+IndentWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+AccessModifierOffset: -4                # public:/private: indented one level in
+
+# === Braces ===
+BreakBeforeBraces: Allman               # Qt convention: braces on new line
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnEmptyLine: false
+
+# === Function Declarations / Definitions ===
+AlwaysBreakAfterReturnType: TopLevelDefinitions  # return type on own line
+AlwaysBreakBeforeMultilineStrings: true
+BreakConstructorInitializersBeforeComma: false
+ConstructorInitializerIndentWidth: 4
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+PackConstructorInitializers: Never
+
+# === Parameters (alignment) ===
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignConsecutiveBitFields: true
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: false
+BinPackParameters: false
+
+# === Spaces ===
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements   # if( → if (
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyBlock: false
+SpacesInAngles: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceInEmptyParentheses: false
+
+# === Line Width ===
+ColumnLimit: 100
+PenaltyExcessCharacter: 40
+PenaltyReturnTypeOnItsOwnLine: 60
+
+# === Includes ===
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           '^<Q.*'
+    Priority:        3
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '^<.*>'
+    Priority:        4
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '^"'
+    Priority:        2
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '.*'
+    Priority:        1
+    SortPriority:    0
+    CaseSensitive:   false
+IncludeIsMainRegex: '(_test)?$'
+IncludeIsMainSourceRegex: '(^|/)main\.cpp$'
+
+# === Macros ===
+AlignConsecutiveMacros: true
+IndentPPDirectives: BeforeHash          # indent #if / #else / #endif
+PPIndentWidth: 4
+IndentCaseLabels: true
+
+# === Comments ===
+ReflowComments: true
+CommentPragmas: '^ IWYU pragma:'
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# === Language-specific ===
+Language: Cpp
+Standard: c++17
+InsertBraces: false                     # Allman style doesn't need insert-braces
+InsertNewlineAtEOF: true
+DerivePointerAlignment: false
+PointerAlignment: Left                  # int* ptr — Qt convention
+ReferenceAlignment: Left                # int& ref — same
+
+# === Qt macros special handling ===
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+StatementMacros:
+  - Q_OBJECT
+  - Q_PROPERTY
+  - Q_ENUM
+  - Q_SIGNALS
+  - Q_SLOTS
+  - Q_INVOKABLE
+  - Q_DECLARE_METATYPE
+  - Q_DECLARE_FLAGS
+  - Q_DECLARE_OPERATORS_FOR_FLAGS
+TypenameMacros:
+  - QT_BEGIN_NAMESPACE
+  - QT_END_NAMESPACE
+  - QHF_DECLARE_NAMESPACE_TR
+...

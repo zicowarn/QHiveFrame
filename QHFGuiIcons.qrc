@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/gui">
+        <file>icons/Close.svg</file>
+        <file>icons/Mode.svg</file>
+        <file>icons/menuIcon.svg</file>
+        <file>icons/frontView.svg</file>
+        <file>icons/backView.svg</file>
+        <file>icons/leftView.svg</file>
+        <file>icons/rightView.svg</file>
+        <file>icons/topView.svg</file>
+        <file>icons/menuSubmenuR90.svg</file>
+        <file>icons/menuClose.svg</file>
+        <file>icons/menuExit.svg</file>
+        <file>icons/menuExport.svg</file>
+        <file>icons/menuExportDoc.svg</file>
+        <file>icons/menuExportExcel.svg</file>
+        <file>icons/menuExportPdf.svg</file>
+        <file>icons/menuExportVidei.svg</file>
+        <file>icons/menuHelp.svg</file>
+        <file>icons/menuImport.svg</file>
+        <file>icons/menuInfo.svg</file>
+        <file>icons/menuNew.svg</file>
+        <file>icons/menuNewFile.svg</file>
+        <file>icons/menuOpen.svg</file>
+        <file>icons/menuSave.svg</file>
+        <file>icons/menuSetting.svg</file>
+        <file>icons/menuSubmenu.svg</file>
+        <file>icons/aboutUS.svg</file>
+        <file>icons/newFile.svg</file>
+        <file>icons/open.svg</file>
+        <file>icons/save.svg</file>
+        <file>icons/redo.svg</file>
+        <file>icons/undo.svg</file>
+        <file>icons/chart-gantt.svg</file>
+        <file>icons/folder-star.svg</file>
+        <file>icons/item.svg</file>
+        <file>icons/logo.svg</file>
+        <file>icons/logo-border.svg</file>
+        <file>icons/test1.svg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,124 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "default",
+      "displayName": "Debug",
+      "description": "Debug build with full symbols",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "default",
+      "displayName": "Release",
+      "description": "Optimized release build",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "relwithdebinfo",
+      "inherits": "default",
+      "displayName": "RelWithDebInfo",
+      "description": "Release build with debug symbols",
+      "binaryDir": "${sourceDir}/build/relwithdebinfo",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "debug-msvc",
+      "inherits": "debug",
+      "displayName": "Debug (MSVC)",
+      "description": "Debug build using Visual Studio generator",
+      "generator": "Visual Studio 17 2022",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "release-msvc",
+      "inherits": "release",
+      "displayName": "Release (MSVC)",
+      "description": "Release build using Visual Studio generator",
+      "generator": "Visual Studio 17 2022",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "shared-debug",
+      "inherits": "debug",
+      "displayName": "Shared Library Debug",
+      "description": "Debug build as shared library (DLL)",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON"
+      }
+    },
+    {
+      "name": "test",
+      "inherits": "debug",
+      "displayName": "Test",
+      "description": "Debug build with tests enabled",
+      "binaryDir": "${sourceDir}/build/test",
+      "cacheVariables": {
+        "BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "docs",
+      "inherits": "default",
+      "displayName": "Documentation",
+      "description": "Build Doxygen documentation only",
+      "binaryDir": "${sourceDir}/build/docs",
+      "cacheVariables": {
+        "BUILD_DOCS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "displayName": "Build Debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "displayName": "Build Release"
+    },
+    {
+      "name": "relwithdebinfo",
+      "configurePreset": "relwithdebinfo",
+      "displayName": "Build RelWithDebInfo"
+    },
+    {
+      "name": "docs",
+      "configurePreset": "docs",
+      "displayName": "Build Documentation"
+    },
+    {
+      "name": "test",
+      "configurePreset": "test",
+      "displayName": "Build with Tests"
+    }
+  ]
+}

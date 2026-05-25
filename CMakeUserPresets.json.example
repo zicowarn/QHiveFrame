@@ -1,0 +1,46 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "mac-brew",
+            "inherits": "debug",
+            "displayName": "macOS (Homebrew Qt5)",
+            "description": "Debug build with Homebrew Qt5 — set your Qt5_DIR path here",
+            "cacheVariables": {
+                "Qt5_DIR": "/usr/local/opt/qt@5/lib/cmake/Qt5"
+            }
+        },
+        {
+            "name": "mac-brew-test",
+            "inherits": "mac-brew",
+            "displayName": "macOS (Homebrew Qt5) + Tests",
+            "description": "Debug + tests + examples with Homebrew Qt5",
+            "cacheVariables": {
+                "BUILD_TESTS": "ON",
+                "BUILD_EXAMPLES": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "mac-brew",
+            "configurePreset": "mac-brew",
+            "displayName": "Build (macOS Brew)"
+        },
+        {
+            "name": "mac-brew-test",
+            "configurePreset": "mac-brew-test",
+            "displayName": "Build + Test (macOS Brew)"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "mac-brew-test",
+            "configurePreset": "mac-brew-test",
+            "displayName": "Test (macOS Brew)",
+            "output": {
+                "verbosity": "verbose"
+            }
+        }
+    ]
+}
