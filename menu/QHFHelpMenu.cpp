@@ -9,9 +9,15 @@ namespace QHF {
     QHF_REGISTER_MENU("Help", QHFHelpMenu, QHFHelpMenu::SUGGESTED_ORDER)
     QHFHelpMenu::QHFHelpMenu(QObject* parent) : QHFMenuBase(parent) {}
 
-    QString QHFHelpMenu::menuName() const { return "Help"; }
+    QString QHFHelpMenu::menuName() const
+    {
+        return "Help";
+    }
 
-    QString QHFHelpMenu::transName() const { return tr("Help"); }
+    QString QHFHelpMenu::transName() const
+    {
+        return tr("Help");
+    }
 
     void QHFHelpMenu::initializeImpl() {
         // 准备menu项

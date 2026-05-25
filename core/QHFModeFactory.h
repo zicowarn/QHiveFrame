@@ -11,7 +11,7 @@
 #include <QStringList>
 #include <QVariant>
 #include <functional>
-#include <qHash>
+#include <QHash>
 #include <type_traits>
 
 namespace QHF {

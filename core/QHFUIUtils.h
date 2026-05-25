@@ -32,14 +32,20 @@ namespace QHF {
         explicit StrongType(ValueType val) : value(std::move(val)) {}
 
         // Provides conversion to ValueType (optional)
-        operator ValueType() const { return value; }
+        operator ValueType() const
+        {
+            return value;
+        }
     };
 
     /**
      * @brief Notification (see description)
      * 可Returns currentactivewindow 特定typepointer
      */
-    template <typename T> T* activeWindowAs() { return qobject_cast<T*>(qApp->activeWindow()); }
+    template <typename T> T* activeWindowAs()
+    {
+        return qobject_cast<T*>(qApp->activeWindow());
+    }
     // 示例: MainWindow* mw = activeWindowAs<MainWindow>();
 
     /**

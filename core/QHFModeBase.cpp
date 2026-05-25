@@ -38,7 +38,10 @@ namespace QHF {
 
     void QHFModeBase::update() { emit contentChanged(); }
 
-    QWidget* QHFModeBase::createHeaderContent() { return nullptr; }
+    QWidget* QHFModeBase::createHeaderContent()
+    {
+        return nullptr;
+    }
 
     QWidget* QHFModeBase::createContent() { return static_cast<QWidget*>(this); };
 

@@ -55,11 +55,20 @@ namespace QHF {
 
     void QHFEditorBase::requestUpdate() { updateContent(); }
 
-    QGridLayout* QHFEditorBase::headerLayout() const { return m_headerLayout; }
+    QGridLayout* QHFEditorBase::headerLayout() const
+    {
+        return m_headerLayout;
+    }
 
-    QHBoxLayout* QHFEditorBase::contentLayout() const { return m_contentLayout; }
+    QHBoxLayout* QHFEditorBase::contentLayout() const
+    {
+        return m_contentLayout;
+    }
 
-    QString QHFEditorBase::currentModeName() const { return m_currentMode->modeName(); }
+    QString QHFEditorBase::currentModeName() const
+    {
+        return m_currentMode->modeName();
+    }
 
     void QHFEditorBase::setEditorPreSelectMode(const QString& modeName) {
         if (!modeName.isEmpty() && m_modeCombo != nullptr) {
@@ -309,7 +318,10 @@ namespace QHF {
         return m_buttonArea;
     }
 
-    bool QHFEditorBase::hasModeCombo() const { return m_hasModeCombo; }
+    bool QHFEditorBase::hasModeCombo() const
+    {
+        return m_hasModeCombo;
+    }
 
     void QHFEditorBase::setHasModeCombo(bool hasModeCombo) { m_hasModeCombo = hasModeCombo; }
 

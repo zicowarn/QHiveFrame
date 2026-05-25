@@ -1,0 +1,94 @@
+# GitHub Actions CI for QHiveFrame
+#
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  BUILD_DIR: ${{ github.workspace }}/build/ci
+
+jobs:
+  ##############################################################################
+  # Build & compile check (Linux / macOS)
+  ##############################################################################
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Qt5 + Ninja (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            qtbase5-dev qtchooser qttools5-dev-tools \
+            ninja-build
+
+      - name: Cache Qt5 (macOS)
+        if: runner.os == 'macOS'
+        id: cache-qt5
+        uses: actions/cache@v5
+        with:
+          path: /opt/qt5
+          key: qt5-5.15.2-${{ runner.arch }}
+
+      - name: Install Qt5 + Ninja (macOS)
+        if: runner.os == 'macOS' && steps.cache-qt5.outputs.cache-hit != 'true'
+        run: |
+          brew install ninja
+          # Use aqtinstall for Qt5 (brew qt@5 is deprecated/deleted on newer macOS)
+          python3 -m pip install aqtinstall --break-system-packages 2>/dev/null || \
+            python3 -m pip install aqtinstall
+          python3 -m aqt install-tool mac desktop tools_qtcreator 2>/dev/null || true
+          sudo python3 -m aqt install-qt mac desktop 5.15.2 clang_64 --outputdir /opt/qt5
+          sudo chmod -R a+rX /opt/qt5
+
+      - name: Install Ninja (macOS, cache hit)
+        if: runner.os == 'macOS' && steps.cache-qt5.outputs.cache-hit == 'true'
+        run: brew install ninja
+
+      - name: Configure (Release)
+        run: |
+          _qt5=""
+          _arch=""
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            _qt5="-DCMAKE_PREFIX_PATH=/opt/qt5/5.15.2/clang_64"
+            _arch="-DCMAKE_OSX_ARCHITECTURES=x86_64"
+          fi
+          cmake -S . -B ${{ env.BUILD_DIR }} -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_EXAMPLES=ON \
+            $_qt5 $_arch
+
+      - name: Build library
+        run: cmake --build ${{ env.BUILD_DIR }} --target QHiveFrame -j$(nproc 2>/dev/null || sysctl -n hw.ncpu)
+
+      - name: Build examples
+        run: cmake --build ${{ env.BUILD_DIR }} --target uni-demo -j$(nproc 2>/dev/null || sysctl -n hw.ncpu)
+
+  ##############################################################################
+  # Code style check (clang-format)
+  ##############################################################################
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install clang-format
+        run: sudo apt-get install -y -qq clang-format
+
+      - name: Check formatting
+        shell: bash
+        run: |
+          find . \( -name '*.cpp' -o -name '*.h' -o -name '*.tpp' \) \
+            ! -path './build/*' ! -path './.github/*' ! -path './icons/*' |
+            xargs clang-format -style=file --dry-run -Werror 2>&1

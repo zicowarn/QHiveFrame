@@ -11,9 +11,15 @@ namespace QHF {
     QHF_REGISTER_MENU("View", QHFViewMenu, QHFViewMenu::SUGGESTED_ORDER)
     QHFViewMenu::QHFViewMenu(QObject* parent) : QHFMenuBase(parent) {}
 
-    QString QHFViewMenu::menuName() const { return "View"; }
+    QString QHFViewMenu::menuName() const
+    {
+        return "View";
+    }
 
-    QString QHFViewMenu::transName() const { return tr("View"); }
+    QString QHFViewMenu::transName() const
+    {
+        return tr("View");
+    }
 
     void QHFViewMenu::initializeImpl() {
         // 准备menu项

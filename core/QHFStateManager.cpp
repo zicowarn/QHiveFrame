@@ -74,17 +74,26 @@ namespace QHF {
         m_favoritePlaces.clear();
     }
 
-    bool QHFStateManager::isBlockingWindowActive() const { return m_isBlockingWindowActive; }
+    bool QHFStateManager::isBlockingWindowActive() const
+    {
+        return m_isBlockingWindowActive;
+    }
 
     void QHFStateManager::setBlockingWindowActive(bool isBlocking) {
         m_isBlockingWindowActive = isBlocking;
     }
 
-    QWidget* QHFStateManager::activeWindow() const { return m_activeWindow; }
+    QWidget* QHFStateManager::activeWindow() const
+    {
+        return m_activeWindow;
+    }
 
     void QHFStateManager::setActiveWindow(QWidget* window) { m_activeWindow = window; }
 
-    int QHFStateManager::countWindows() const { return m_windowStates.size(); }
+    int QHFStateManager::countWindows() const
+    {
+        return m_windowStates.size();
+    }
 
     bool QHFStateManager::existWindow(QWidget* window) const {
         return m_windowStates.contains(window);
@@ -215,7 +224,10 @@ namespace QHF {
 
     QString QHFStateManager::getCurrentLanguage() const { return m_currentLanguage; };
 
-    QStringList QHFStateManager::getFavoritePlaces() const { return m_favoritePlaces; }
+    QStringList QHFStateManager::getFavoritePlaces() const
+    {
+        return m_favoritePlaces;
+    }
 
     void QHFStateManager::setFavoritePlaces(const QStringList& places) { m_favoritePlaces = places; }
 

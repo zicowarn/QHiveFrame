@@ -20,9 +20,15 @@ namespace QHF {
     QHFGeneralPreferencePanel::QHFGeneralPreferencePanel(QWidget* parent)
         : QHFPreferencePanelBase(parent) {}
 
-    QString QHFGeneralPreferencePanel::panelName() const { return "General"; }
+    QString QHFGeneralPreferencePanel::panelName() const
+    {
+        return "General";
+    }
 
-    QString QHFGeneralPreferencePanel::transName() const { return tr("General"); }
+    QString QHFGeneralPreferencePanel::transName() const
+    {
+        return tr("General");
+    }
 
     void QHFGeneralPreferencePanel::loadSettings(const QList<Setting>& settings) {
         for (const auto& setting : settings) {

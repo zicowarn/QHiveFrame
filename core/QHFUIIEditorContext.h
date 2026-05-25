@@ -36,13 +36,19 @@ namespace QHF {
          * @brief  (see description)
          * @return Header Layout pointer, 若无则Returns  nullptr
          */
-        [[nodiscard]] virtual QGridLayout* headerLayout() const { return nullptr; }
+        [[nodiscard]] virtual QGridLayout* headerLayout() const
+        {
+            return nullptr;
+        }
 
         /**
          * @brief  (see description)
          * @return Content Layout pointer, 若无则Returns  nullptr
          */
-        [[nodiscard]] virtual QHBoxLayout* contentLayout() const { return nullptr; }
+        [[nodiscard]] virtual QHBoxLayout* contentLayout() const
+        {
+            return nullptr;
+        }
 
         /// --- datarelated ---
         /**
@@ -85,7 +91,10 @@ namespace QHF {
         /**
          * @brief  (see description)
          * @return editortitle*/
-        [[nodiscard]] virtual QString editorTitle() const { return {}; }
+        [[nodiscard]] virtual QString editorTitle() const
+        {
+            return {};
+        }
 
         /// --- filerelated ---
         /**
@@ -96,7 +105,10 @@ namespace QHF {
         /**
          * @brief  (see description)
          * @return filepath*/
-        [[nodiscard]] virtual QString filePath() const { return {}; }
+        [[nodiscard]] virtual QString filePath() const
+        {
+            return {};
+        }
 
         /// --- 处理notification ----
         /**

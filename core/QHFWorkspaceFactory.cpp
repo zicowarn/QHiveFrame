@@ -36,7 +36,10 @@ namespace QHF {
         return m_creators[name](parent, isInitialize);
     }
 
-    QList<WorkspaceInfo> QHFWorkspaceRegistry::workspaces() const { return m_workspaces; }
+    QList<WorkspaceInfo> QHFWorkspaceRegistry::workspaces() const
+    {
+        return m_workspaces;
+    }
 
     int QHFWorkspaceRegistry::getOrder(const QString& workspaceName) const {
         return m_registeredOrders.value(

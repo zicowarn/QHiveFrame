@@ -51,6 +51,61 @@ set(CMAKE_FIND_FRAMEWORK LAST)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
 
+# ============================================
+# Translation files — compile .ts → .qm
+# ============================================
+# ============================================
+# Translation files — compile .ts → .qm at configure time
+# ============================================
+find_program(QT_LRELEASE lrelease
+    HINTS /usr/local/opt/qt@5/bin /opt/homebrew/bin /usr/lib/qt5/bin /usr/share/qt5/bin
+)
+
+# Our .ts files
+set(QHF_TS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/locals/lang_en_US.ts
+    ${CMAKE_CURRENT_SOURCE_DIR}/locals/lang_zh_CN.ts
+)
+
+if(QT_LRELEASE)
+    foreach(_ts ${QHF_TS_SOURCES})
+        string(REGEX REPLACE "\\.ts$" ".qm" _qm "${_ts}")
+        if(NOT EXISTS "${_qm}" OR "${_ts}" IS_NEWER_THAN "${_qm}")
+            message(STATUS "Compiling ${_ts} → ${_qm}")
+            execute_process(
+                COMMAND ${QT_LRELEASE} -silent "${_ts}" -qm "${_qm}"
+                RESULT_VARIABLE _lret
+            )
+            if(_lret AND NOT _lret EQUAL 0)
+                message(WARNING "lrelease failed for ${_ts} (exit ${_lret})")
+            endif()
+        endif()
+    endforeach()
+    # Also copy Qt's built-in .qm files
+    foreach(_lang en zh_CN)
+        set(_src "${CMAKE_CURRENT_SOURCE_DIR}/locals/qt_${_lang}.qm")
+        if(NOT EXISTS "${_src}")
+            find_file(_qt_qm "qt_${_lang}.qm"
+                HINTS /usr/local/opt/qt@5/translations /opt/homebrew/share/qt5/translations
+                      /usr/share/qt5/translations /usr/lib/qt5/translations
+                NO_DEFAULT_PATH
+            )
+            if(_qt_qm)
+                configure_file("${_qt_qm}" "${_src}" COPYONLY)
+                message(STATUS "Copied Qt translation: ${_qt_qm}")
+                unset(_qt_qm CACHE)
+            else()
+                file(WRITE "${_src}" "")
+                message(WARNING "qt_${_lang}.qm not found — empty placeholder created")
+            endif()
+        endif()
+    endforeach()
+else()
+    message(WARNING "lrelease not found — .qm files assumed pre-built in source tree")
+endif()
+unset(QT_LRELEASE)
+
+
 
 
 # ============================================

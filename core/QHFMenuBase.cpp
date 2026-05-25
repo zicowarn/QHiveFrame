@@ -9,7 +9,10 @@ namespace QHF {
 
     void QHFMenuBase::initialize() { initializeImpl(); }
 
-    QList<MenuItem> QHFMenuBase::menuItems() const { return m_items; }
+    QList<MenuItem> QHFMenuBase::menuItems() const
+    {
+        return m_items;
+    }
 
     void QHFMenuBase::addSubMenu(const QString& path, int order, const QString& transName) {
         // Create menu项

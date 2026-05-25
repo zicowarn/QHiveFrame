@@ -109,7 +109,10 @@ namespace QHF {
         }
     }
 
-    QHFMessageBox::QHFMsgBoxButton QHFMessageBox::result() const { return m_clickedButton; }
+    QHFMessageBox::QHFMsgBoxButton QHFMessageBox::result() const
+    {
+        return m_clickedButton;
+    }
 
     void QHFMessageBox::setButtonText(QHFMessageBox::QHFMsgBoxButton button, const QString& text) {
         auto iter = m_buttons.find(button);

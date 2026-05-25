@@ -34,7 +34,10 @@ namespace QHF {
          * @brief  (see description)
          * @param evt Event type
          * @return string*/
-        inline QString toString(EventType evt) { return eventNameMap.key(evt); }
+        inline QString toString(EventType evt)
+        {
+            return eventNameMap.key(evt);
+        }
 
         /**
          * @brief  (see description)

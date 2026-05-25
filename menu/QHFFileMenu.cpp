@@ -13,9 +13,15 @@ namespace QHF {
     QHF_REGISTER_MENU("File", QHFFileMenu, QHFFileMenu::SUGGESTED_ORDER)
     QHFFileMenu::QHFFileMenu(QObject* parent) : QHFMenuBase(parent) {}
 
-    QString QHFFileMenu::menuName() const { return "File"; }
+    QString QHFFileMenu::menuName() const
+    {
+        return "File";
+    }
 
-    QString QHFFileMenu::transName() const { return tr("File"); }
+    QString QHFFileMenu::transName() const
+    {
+        return tr("File");
+    }
 
     void QHFFileMenu::initializeImpl() {
         // 准备menu项

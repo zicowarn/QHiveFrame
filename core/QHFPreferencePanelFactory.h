@@ -4,7 +4,7 @@
 #include <QMap>
 #include <QString>
 #include <functional>
-#include <qHash>
+#include <QHash>
 #include <type_traits>
 
 #include "QHFUIIPreferencePanel.h"

@@ -6,6 +6,7 @@
 #include "QHFThemeManager.h"
 
 #include <QApplication>
+#include <cmath>
 #include <QDebug>
 #include <QLabel>
 #include <QPaintEvent>
@@ -102,7 +103,10 @@ namespace QHF {
         rebuild();
     }
 
-    LayoutNode* QHFWorkspaceBase::root() const { return m_root; }
+    LayoutNode* QHFWorkspaceBase::root() const
+    {
+        return m_root;
+    }
 
     LayoutNode* QHFWorkspaceBase::cloneRoot() const {
         if (m_root == nullptr) {

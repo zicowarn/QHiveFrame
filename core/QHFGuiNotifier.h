@@ -150,7 +150,10 @@ namespace QHF {
         /**
          * @brief  (see description)
          * @param type notificationtype* @return string*/
-        inline QString toString(QHFNotifierType type) { return notifierMap.key(type); }
+        inline QString toString(QHFNotifierType type)
+        {
+            return notifierMap.key(type);
+        }
 
         /**
          * @brief  (see description)

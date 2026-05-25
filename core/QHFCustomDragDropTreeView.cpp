@@ -26,7 +26,10 @@ namespace QHF {
 
     void QHFCustomDragDropTreeView::setTreeType(QHFTreeType type) { m_treeType = type; }
 
-    QHFTreeType QHFCustomDragDropTreeView::getTreeType() const { return m_treeType; }
+    QHFTreeType QHFCustomDragDropTreeView::getTreeType() const
+    {
+        return m_treeType;
+    }
 
     void QHFCustomDragDropTreeView::startDrag(Qt::DropActions supportedActions) {
         // Returns current 选中项

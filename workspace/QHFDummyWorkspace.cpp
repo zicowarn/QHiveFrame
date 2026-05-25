@@ -15,7 +15,10 @@ namespace QHF {
         return QHFWorkspaceTypeUtils::toString(QHFWorkspaceType::DUMMY);
     }
 
-    QHFWorkspaceType QHFDummyWorkspace::workspaceType() const { return QHFWorkspaceType::DUMMY; }
+    QHFWorkspaceType QHFDummyWorkspace::workspaceType() const
+    {
+        return QHFWorkspaceType::DUMMY;
+    }
 
     void QHFDummyWorkspace::initializeImpl() {
         // Set object name

@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QLabel>
 #include <QMenu>
-#include <QPushbutton>
+#include <QPushButton>
 #include <QVBoxLayout>
 
 #include "QHFCustomActionWidgetFactory.h"
@@ -32,9 +32,15 @@ namespace QHF {
 
     void QHFCustomActionWidgetDummy::updateContext() {}
 
-    QVariantMap QHFCustomActionWidgetDummy::getData() const { return {}; }
+    QVariantMap QHFCustomActionWidgetDummy::getData() const
+    {
+        return {};
+    }
 
-    ActionType QHFCustomActionWidgetDummy::getActionType() const { return m_type; }
+    ActionType QHFCustomActionWidgetDummy::getActionType() const
+    {
+        return m_type;
+    }
 
     void QHFCustomActionWidgetDummy::applyTheme() {
         // Applies theme

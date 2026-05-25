@@ -7,7 +7,10 @@
 namespace QHF {
 
     /// --- QHFPreferencePanelBase implementation ---
-    QList<SettingMeta> QHFPreferencePanelBase::registeredSettings() { return {}; }
+    QList<SettingMeta> QHFPreferencePanelBase::registeredSettings()
+    {
+        return {};
+    }
 
     QHFPreferencePanelBase::QHFPreferencePanelBase(QWidget* parent) : QWidget(parent) {
         // Initializes变量

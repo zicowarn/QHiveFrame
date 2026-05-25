@@ -9,7 +9,10 @@ namespace QHF {
     QString QHFDummyEditor::editorName() const {
         return EditorTypeUtils::toString(EditorType::DUMMY);
     }
-    EditorType    QHFDummyEditor::editorType() const { return EditorType::DUMMY; }
+    EditorType    QHFDummyEditor::editorType() const
+    {
+        return EditorType::DUMMY;
+    }
     IModeContext* QHFDummyEditor::createMode(const QString& modeName) {
         // check if modeName is valid
         auto type = QHFModeTypeUtils::fromString(modeName);

@@ -55,11 +55,17 @@ namespace QHF {
 
     void QHFCustomUnitSpinBox::setIncFactor(int _factor) { m_incFactor = _factor; }
 
-    int QHFCustomUnitSpinBox::getIncFactor() const { return m_incFactor; }
+    int QHFCustomUnitSpinBox::getIncFactor() const
+    {
+        return m_incFactor;
+    }
 
     void QHFCustomUnitSpinBox::setIncStep(float _step) { m_incStep = _step; }
 
-    float QHFCustomUnitSpinBox::getIncStep() const { return m_incStep; }
+    float QHFCustomUnitSpinBox::getIncStep() const
+    {
+        return m_incStep;
+    }
 
     void QHFCustomUnitSpinBox::setFloatValueWithoutSignal(float _value) {
         blockSignals(true);
@@ -76,7 +82,10 @@ namespace QHF {
         m_isBlockSignal = false;
     }
 
-    float QHFCustomUnitSpinBox::getFloatValue() const { return m_lineEdit->text().toFloat(); }
+    float QHFCustomUnitSpinBox::getFloatValue() const
+    {
+        return m_lineEdit->text().toFloat();
+    }
 
     /// NOLINTNEXTLINE(readability-function-cognitive-complexity)
     bool QHFCustomUnitSpinBox::eventFilter(QObject* obj, QEvent* event) {

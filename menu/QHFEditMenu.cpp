@@ -11,9 +11,15 @@ namespace QHF {
     QHF_REGISTER_MENU("Edit", QHFEditMenu, QHFEditMenu::SUGGESTED_ORDER)
     QHFEditMenu::QHFEditMenu(QObject* parent) : QHFMenuBase(parent) {}
 
-    QString QHFEditMenu::menuName() const { return "Edit"; }
+    QString QHFEditMenu::menuName() const
+    {
+        return "Edit";
+    }
 
-    QString QHFEditMenu::transName() const { return tr("Edit"); }
+    QString QHFEditMenu::transName() const
+    {
+        return tr("Edit");
+    }
 
     void QHFEditMenu::initializeImpl() {
         // 准备menu项

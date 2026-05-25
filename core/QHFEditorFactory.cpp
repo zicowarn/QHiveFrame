@@ -19,6 +19,9 @@ namespace QHF {
         return (iter != m_creators.end()) ? iter.value()(parent) : nullptr;
     }
 
-    QStringList QHFEditorRegistry::editorNames() const { return m_editorNames; }
+    QStringList QHFEditorRegistry::editorNames() const
+    {
+        return m_editorNames;
+    }
 
 } // namespace QHF

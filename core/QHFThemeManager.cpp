@@ -183,7 +183,13 @@ namespace QHF {
         }
     }
 
-    ThemeType QHFThemeManager::themeType() const { return m_type; }
+    ThemeType QHFThemeManager::themeType() const
+    {
+        return m_type;
+    }
 
-    const Theme& QHFThemeManager::theme() const { return m_theme; }
+    const Theme& QHFThemeManager::theme() const
+    {
+        return m_theme;
+    }
 } // namespace QHF

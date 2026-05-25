@@ -1,0 +1,140 @@
+# Release CI for QHiveFrame
+# - Triggered by tags matching v* (e.g. v1.0.0, v0.2.0)
+# - Builds library + examples in Release mode
+# - Packages artifacts per platform
+# - Creates a GitHub Release
+#
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  BUILD_DIR: ${{ github.workspace }}/build/release
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact: QHiveFrame-linux-amd64
+          - os: macos-latest
+            artifact: QHiveFrame-macos-x86_64
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Qt5 + Ninja (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            qtbase5-dev qtchooser qttools5-dev-tools \
+            ninja-build
+
+      - name: Install Qt5 + Ninja (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install ninja
+          python3 -m pip install aqtinstall --break-system-packages 2>/dev/null || \
+            python3 -m pip install aqtinstall
+          python3 -m aqt install-tool mac desktop tools_qtcreator 2>/dev/null || true
+          sudo python3 -m aqt install-qt mac desktop 5.15.2 clang_64 --outputdir /opt/qt5
+          sudo chmod -R a+rX /opt/qt5
+
+      - name: Configure (Release)
+        run: |
+          _qt5=""
+          _arch=""
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            _qt5="-DCMAKE_PREFIX_PATH=/opt/qt5/5.15.2/clang_64"
+            _arch="-DCMAKE_OSX_ARCHITECTURES=x86_64"
+          fi
+          cmake -S . -B ${{ env.BUILD_DIR }} -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_EXAMPLES=ON \
+            $_qt5 $_arch
+
+      - name: Build library
+        run: cmake --build ${{ env.BUILD_DIR }} --target QHiveFrame -j$(nproc 2>/dev/null || sysctl -n hw.ncpu)
+
+      - name: Build example
+        run: cmake --build ${{ env.BUILD_DIR }} --target uni-demo -j$(nproc 2>/dev/null || sysctl -n hw.ncpu)
+
+      - name: Package artifacts
+        run: |
+          mkdir -p staging/lib staging/include staging/bin
+          # Library
+          cp ${{ env.BUILD_DIR }}/libQHiveFrame.a staging/lib/
+          # Binary
+          cp ${{ env.BUILD_DIR }}/bin/uni-demo staging/bin/
+          # Headers
+          cp -r init staging/include/
+          cp -r core staging/include/
+          cp -r dialog staging/include/
+          cp -r menu staging/include/
+          cp -r workspace staging/include/
+          cp -r subeditor staging/include/
+          cp -r subeditormode staging/include/
+          cp -r preferencepanel staging/include/
+          cp -r customwidget staging/include/
+          # License + readme
+          cp LICENSE staging/ 2>/dev/null || true
+          cp README.md staging/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: staging/
+
+      - name: Create tarball
+        run: |
+          cd staging
+          tar czf ../${{ matrix.artifact }}.tar.gz .
+
+      - name: Upload tarball to release
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}-tarball
+          path: ${{ matrix.artifact }}.tar.gz
+
+  create-release:
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download tarballs
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: List artifacts
+        run: find artifacts -name '*.tar.gz' -exec ls -lh {} \;
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: QHiveFrame ${{ github.ref_name }}
+          body: |
+            ## QHiveFrame ${{ github.ref_name }}
+
+            ### Downloads
+            - **Linux**: `QHiveFrame-linux-amd64.tar.gz` — static library + headers + uni-demo binary
+            - **macOS**: `QHiveFrame-macos-x86_64.tar.gz` — static library + headers + uni-demo binary
+
+            ### Changelog
+            See [commit log](https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}).
+          files: |
+            artifacts/**/*.tar.gz
+          draft: true
+          prerelease: false
+...

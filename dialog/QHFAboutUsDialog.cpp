@@ -105,7 +105,7 @@ namespace QHF {
         font.setPointSizeF(font.pointSizeF() * 1.75); // 1.5倍字体
         titleLabel->setFont(font);
 
-        layout->addWidget(titleLabel, 2.5);
+        layout->addWidget(titleLabel, 2);
 
         // setDescribes 
         auto* descriptionLabel = new QLabel(this);
