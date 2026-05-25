@@ -288,19 +288,19 @@ namespace QHF {
 
         // connectionsignal
         connect(splitVBtn, &QPushButton::clicked, this, [=]() {
-            publishEditorActive("split vertically", false);
+            publishEditorActive("split vertically", true);
             QHFNotifier noti(QHFNotifierType::SPLIT_EDITOR_VERTICAL);
             noti.set("editor", this);
             QHFNotifierCenter::instance().publish(noti);
         });
         connect(splitHBtn, &QPushButton::clicked, this, [=]() {
-            publishEditorActive("split horizontally", false);
+            publishEditorActive("split horizontally", true);
             QHFNotifier noti(QHFNotifierType::SPLIT_EDITOR_HORIZONTAL);
             noti.set("editor", this);
             QHFNotifierCenter::instance().publish(noti);
         });
         connect(removeBtn, &QPushButton::clicked, this, [=]() {
-            publishEditorActive("remove", false);
+            publishEditorActive("remove", true);
             QHFNotifier noti(QHFNotifierType::REMOVE_EDITOR);
             noti.set("editor", this);
             QHFNotifierCenter::instance().publish(noti);

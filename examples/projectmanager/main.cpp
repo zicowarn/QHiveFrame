@@ -5,9 +5,14 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QtCore/QResource>
 
 int main(int argc, char* argv[])
 {
+    // Import Qt resources from QHiveFrame static library
+    // QHFGuiIcons.qrc → provides :/gui/icons/SplitV.svg, Close.svg, etc.
+    Q_INIT_RESOURCE(QHFGuiIcons);
+
     QApplication app(argc, argv);
     app.setApplicationName("QHiveFrame Project Manager");
     app.setOrganizationName("QHiveFrame");
