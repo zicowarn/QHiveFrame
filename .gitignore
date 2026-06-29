@@ -35,6 +35,9 @@ memory/
 
 # Agent workspace files (OpenClaw)
 .openclaw/
+
+# HiveTask local database cache
+.hivetask/
 AGENTS.md
 HEARTBEAT.md
 IDENTITY.md
